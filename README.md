@@ -21,16 +21,43 @@ Este proyecto es una solución desktop desarrollada en **Python** utilizando **P
 
 ```
 ProyectTI_Original/
-├── Main.py                 # Punto de entrada de la aplicación
-├── Login.py               # Interfaz de autenticación
-├── Interfaz.py            # Interfaz gráfica principal
-├── Acciones.py            # Lógica de operaciones y datos
-├── Db_manager.py          # Gestor de base de datos
-├── ActualizarBD.py        # Actualización de base de datos
-├── credentials.py         # Credenciales de acceso
-├── requirements.txt       # Dependencias del proyecto
-├── README.md              # Este archivo
-└── build/                 # Carpeta de compilación (PyInstaller)
+├── src/                       # Código fuente de la aplicación
+│   ├── __init__.py           
+│   ├── Main.py               # Punto de entrada principal
+│   ├── Login.py              # Interfaz de autenticación
+│   ├── Interfaz.py           # Interfaz gráfica principal
+│   ├── Acciones.py           # Lógica de operaciones y datos
+│   ├── Db_manager.py         # Gestor de base de datos
+│   └── ActualizarBD.py       # Actualización de base de datos
+│
+├── config/                   # Configuración y credenciales
+│   ├── __init__.py
+│   └── credentials.py        # Credenciales de acceso (NO se sube a Git)
+│
+├── docs/                     # Documentación completa
+│   ├── README.md             # Este archivo
+│   ├── PRESENTACION.md       # Presentación del proyecto
+│   ├── DESPLIEGUE.md         # Guía de despliegue
+│   ├── GITHUB.md             # Instrucciones GitHub
+│   ├── CHECKLIST_TFM.md      # Checklist de requisitos
+│   ├── Requisitos.md         # Requisitos del TFM
+│   ├── Documentacion-TFM.pdf # Documento PDF de requisitos
+│   └── Encabezado.pdf        # Encabezado de la universidad
+│
+├── assets/                   # Recursos (iconos, imágenes, etc.)
+│   └── icono.ico             # Icono de la aplicación
+│
+├── data/                     # Datos de la aplicación
+│   ├── equipo_computo.db     # Base de datos SQLite (generada, NO se sube a Git)
+│   └── *.xlsx                # Archivos Excel de datos (NO se suben a Git)
+│
+├── build/                    # Archivos de compilación (PyInstaller)
+│   └── ...
+│
+├── main.py                   # Script wrapper que ejecuta la aplicación
+├── requirements.txt          # Dependencias del proyecto
+├── .gitignore               # Configuración de Git
+└── __pycache__/             # Caché de Python (se genera automáticamente)
 ```
 
 ## Instalación
@@ -69,13 +96,19 @@ ProyectTI_Original/
 
 ## Ejecución
 
-Para ejecutar la aplicación:
+La aplicación puede ejecutarse desde el directorio raíz:
 
 ```bash
-python Main.py
+python main.py
 ```
 
-La aplicación abrirá primero una ventana de login donde deberá ingresar las credenciales configuradas en `credentials.py`.
+O directamente desde la carpeta src/:
+
+```bash
+python src/Main.py
+```
+
+**Nota:** El nombre de usuario y contraseña deben ser configurados en `config/credentials.py`.
 
 ## Funcionalidades Principales
 
@@ -113,13 +146,15 @@ La aplicación abrirá primero una ventana de login donde deberá ingresar las c
 ## Configuración
 
 ### Credenciales
-Las credenciales de acceso se configuran en el archivo `credentials.py`. Modifique los valores de `USUARIO` y `CONTRASENA` para cambiar las credenciales de acceso.
+Las credenciales de acceso se configuran en el archivo `config/credentials.py`. Modifique los valores de `USUARIO` y `CONTRASENA` para cambiar las credenciales de acceso.
 
 ```python
-# credentials.py
+# config/credentials.py
 USUARIO = "su_usuario"
 CONTRASENA = "su_contraseña"
 ```
+
+**Importante:** El archivo `config/credentials.py` está configurado en `.gitignore` y no se subirá a GitHub.
 
 ## Estructura de la Base de Datos
 
@@ -182,11 +217,12 @@ El ejecutable se generará en la carpeta `dist/` con el nombre `Main.exe`.
 
 ## Notas de Desarrollo
 
-- La base de datos SQLite se crea automáticamente al ejecutar la aplicación
-- Los archivos de datos se almacenan localmente en la máquina
-- Se recomienda hacer backups periódicos de la base de datos `equipo_computo.db`
+- La base de datos SQLite se crea automáticamente al ejecutar la aplicación en la carpeta `data/`
+- Los archivos de datos se almacenan localmente en la máquina dentro del directorio `data/`
+- Se recomienda hacer backups periódicos de la base de datos ubicada en `data/equipo_computo.db`
 - El proyecto está optimizado para Windows, pero puede adaptarse a otras plataformas
-- Los datos sensibles (credenciales) están configurados en `credentials.py` - modificar según sea necesario
+- Los datos sensibles (credenciales) están configurados en `config/credentials.py` - modificar según sea necesario
+- El archivo `assets/icono.ico` se utiliza para la interfaz gráfica
 
 ## Contribuciones y Mejoras
 
