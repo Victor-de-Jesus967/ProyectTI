@@ -1,0 +1,65 @@
+# Entorno virtual
+.venv/
+venv/
+ENV/
+env/
+.env
+
+# Caché de Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# Base de datos
+*.db
+*.sqlite
+*.sqlite3
+equipo_computo.db
+
+# Archivos de datos locales
+Formato de retiro 2026 - LOCAL AGD.xlsx
+*.xlsx
+*.xls
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Compilación
+*.spec
+*.exe
+*.dmg
+
+# Logs
+*.log
+logs/
+
+# Archivos temporales
+*.tmp
+*.temp
+.cache/
+
+#Archivos .md
+GITHUB.md
+PRESENTACION.md
+RESUMEN_CAMBIOS.md
+CHECKLIST_TFM.md
+REORGANIZACION.md
+
+# Reportes generados
+reports/
+exports/
+
+# Otros
+.pytest_cache/
+.coverage
+htmlcov/
