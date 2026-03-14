@@ -17,4 +17,8 @@ def test_inicializacion():
 def test_ejecucion_principal():
     # Prueba de ejecución principal (ejemplo; adapta)
     resultado = iniciar_interfaz_principal()  # Asume una función principal
+<<<<<<< HEAD
     assert resultado == "éxito"  # Cambia según el comportamiento esperado
+=======
+    assert resultado == "éxito"  # Cambia según el comportamiento esperado
+>>>>>>> ee8135f36b84a92fbc46dc8cdcf4ff299be21ee3
