@@ -19,7 +19,7 @@ build/
 *.db
 *.sqlite
 *.sqlite3
-equipo_computo.db
+data/equipo_computo.db
 
 # Archivos de datos locales
 Formato de retiro 2026 - LOCAL AGD.xlsx

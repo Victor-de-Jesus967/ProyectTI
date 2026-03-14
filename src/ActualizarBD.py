@@ -4,11 +4,12 @@ import pandas as pd
 from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtCore import QTimer, Qt
 import time
+from Db_manager import DB_PATH  # Agregar import para usar la ruta centralizada de la BD
 
 class ActualizarBD:
     def __init__(self):
         self.Interfaz = None
-        self.conn = sqlite3.connect('equipo_computo.db')
+        self.conn = sqlite3.connect(DB_PATH)  # Usar la ruta centralizada
         self.cursor = self.conn.cursor()
         self.progress_dialog = None
         self.current_progress = 0

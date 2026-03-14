@@ -1,3 +1,12 @@
+# Dependencias basadas en el análisis del proyecto:
+# - tkinter: Para interfaces gráficas (incluido en Python estándar, no necesario instalar)
+# - sqlite3: Para gestión de bases de datos (incluido en Python estándar, no necesario instalar)
+# - pytest: Para pruebas unitarias (agregado recientemente)
+# - Otros módulos estándar usados: os, sys, datetime, etc. (no requieren instalación)
+
+pytest==8.3.2  # Versión recomendada para compatibilidad
+# Agrega aquí otras dependencias externas si las encuentras en el código (ej. requests si se usa)
+
 PyQt5>=5.15.11
 openpyxl>=3.1.5
 pandas>=2.0.3
@@ -5,4 +14,3 @@ numpy>=1.24.4
 reportlab>=4.2.5
 PyPDF2>=3.0.1
 Pillow>=10.4.0
-pytest~=9.0.1

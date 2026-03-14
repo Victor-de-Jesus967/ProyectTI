@@ -18,5 +18,3 @@ def test_ejecucion_principal():
     # Prueba de ejecución principal (ejemplo; adapta)
     resultado = iniciar_interfaz_principal()  # Asume una función principal
     assert resultado == "éxito"  # Cambia según el comportamiento esperado
-
-# Agrega más pruebas según los módulos en src/ (ej. Db_manager, Acciones)

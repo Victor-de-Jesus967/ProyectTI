@@ -17,6 +17,7 @@ from reportlab.platypus import SimpleDocTemplate, Paragraph, PageBreak
 
 from Acciones import Acciones
 from ActualizarBD import ActualizarBD
+from Db_manager import DB_PATH  # Agregar import
 
 class Ui_MainWindow(object):
     def __init__(self):
@@ -154,14 +155,6 @@ class Ui_MainWindow(object):
     def cerrar_programa(self):
         QtWidgets.QApplication.quit()
 
-    def buscarficha1(self):
-        ficha = self.Lficha.text()
-        resultado = self.acciones.buscar_registro(ficha)
-        if resultado:
-            self.cargar_datos_en_tabla_EquipoEntregadoAdquisicion(resultado)
-        else:
-            print("No se encontró el número de ficha o usuario.")
-
     # Método para buscar un registro específico por ficha y mostrarlo en la tabla
     def buscar_ficha(self):
         ficha = self.Lficha.text()
@@ -201,33 +194,6 @@ class Ui_MainWindow(object):
         else:
             self.mostrar_mensaje("No se encontró el número de ficha o usuario.")
 
-    # Método para agregar un registro llamando a Acciones
-    def agregar_registro(self):
-        datos = (
-            # Aquí irían los datos capturados de la interfaz
-        )
-        self.acciones.agregar_registro(datos)
-        self.cargar_datos_en_tabla_EquipoEntregadoAdquisicion()
-
-    # Método para modificar un registro llamando a Acciones
-    def modificar_registro(self):
-        id_registro = self.Lficha.text()  # ID del registro a modificar
-        nuevos_datos = (
-            # Nuevos datos para el registro
-        )
-        self.acciones.modificar_registro(id_registro, nuevos_datos)
-        self.cargar_datos_en_tabla_EquipoEntregadoAdquisicion()
-
-    # Método para eliminar un registro llamando a Acciones
-    def eliminar_registro(self):
-        id_registro = self.Lficha.text()  # ID del registro a eliminar
-        self.acciones.eliminar_registro(id_registro)
-        self.cargar_datos_en_tabla_EquipoEntregadoAdquisicion()
-        fila = self.tableView.currentRow()
-        if fila >= 0:
-            ruta_archivo = self.tableView.item(fila, 1).text()
-            os.remove(ruta_archivo)  # Elimina el archivo del sistema
-            self.tableView.removeRow(fila)  # Elimina la fila de la tabla
 
     # Función para cargar los datos en la tabla
     def cargar_datos_en_tabla_EquipoEntregadoAdquisicion(self, datos=None):
@@ -262,45 +228,12 @@ class Ui_MainWindow(object):
         self.Tabla.resizeColumnsToContents()  # Ajustar columnas
         self.Tabla.resizeRowsToContents()  # Ajustar filas
 
-    def abrir_interfaz_resguardo(self):
-        # Cerrar la ventana actual
-        QtWidgets.qApp.closeAllWindows()
-
-        # Abrir la nueva ventana
-        self.window = QtWidgets.QMainWindow()
-        #self.ui = Interfaz2Window()
-        self.ui.setupUi(self.window)
-        self.window.show()
-
     def mostrar_mensaje(self, mensaje):
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Information)
         msg.setText(mensaje)
         msg.setWindowTitle("Información")
         msg.exec_()
-
-    def buscar_ficha1(self):
-        ficha = self.Lficha.text()
-        resultado = self.acciones.buscar_registro(ficha)
-
-        if resultado:
-            self.cargar_datos_en_tabla_EquipoEntregadoAdquisicion(resultado)
-        else:
-            self.mostrar_mensaje("No se encontró el número de ficha o usuario.")
-
-    # Método para cargar los datos en la tabla, muestra todos los datos si 'datos' es None
-    def cargar_datos_en_tabla1(self, datos=None):
-        self.acciones.cargar_datos_en_tabla_EquipoEntregadoAdquisicion(self.Tabla, datos)
-
-        # Ajustar el tamaño de las columnas y filas
-        self.Tabla.resizeColumnsToContents()  # Ajustar columnas
-        self.Tabla.resizeRowsToContents()  # Ajustar filas
-
-    # Método para cargar la tabla según la selección en el comboBox
-    # Método para limpiar la tabla
-    def limpiar_tabla(self):
-        # Limpia todas las filas de la tabla
-        self.Tabla.setRowCount(0)
 
     def actualizar_tabla_por_combo(self):
         """Actualiza los datos de la tabla según la opción seleccionada en el comboBox."""
@@ -325,79 +258,6 @@ class Ui_MainWindow(object):
             print("Tabla lista Equipos Reasignados")
         else:
             print("Tabla no reconocida.")
-
-    def validar_archivo(self):
-        criterio_busqueda = self.Lficha.text().strip()
-        print(f"Criterio de búsqueda: '{criterio_busqueda}'")
-
-        if not criterio_busqueda:
-            QMessageBox.warning(None, "Advertencia", "Por favor, ingrese una ficha, fecha o número de serie.")
-            return
-
-        resultados = self.acciones.buscar_registro1(criterio_busqueda)
-
-        if resultados:
-            mensaje = "Archivos encontrados:\n\n"
-            rutas_archivos = []  # Lista para almacenar las rutas de los archivos
-
-            for item in resultados:
-                registro = item['registro']
-                fecha = item['fecha']
-                ficha = item['ficha']
-                numero_serie = item['numero_serie']
-
-                nombre_archivo = registro[1]
-                ruta_archivo = registro[2]
-                rutas_archivos.append(ruta_archivo)  # Guardar la ruta
-
-                mensaje += f"Nombre: {nombre_archivo}\n"
-                mensaje += f"Ruta: {ruta_archivo}\n"
-                mensaje += f"Fecha: {fecha}\n"
-                mensaje += f"Ficha: {ficha}\n"
-                mensaje += f"Número de Serie: {numero_serie}\n"
-                mensaje += "-" * 40 + "\n"
-
-                # Crear un QMessageBox personalizado con botones
-            msgBox = QMessageBox()
-            msgBox.setWindowTitle("Resultados de Búsqueda")
-            msgBox.setText(mensaje)
-
-            # Agregar botones personalizados
-            abrir_button = msgBox.addButton("Abrir Archivo", QMessageBox.ActionRole)
-            cancelar_button = msgBox.addButton("Cancelar", QMessageBox.RejectRole)
-
-            msgBox.exec_()
-
-            # Verificar qué botón se presionó
-            if msgBox.clickedButton() == abrir_button:
-                if len(rutas_archivos) == 1:
-                    # Si solo hay un archivo, ábrelo directamente
-                    try:
-                        os.startfile(rutas_archivos[0])  # Para Windows
-                        # Para Linux: subprocess.call(["xdg-open", rutas_archivos[0]])
-                        # Para Mac: subprocess.call(["open", rutas_archivos[0]])
-                    except Exception as e:
-                        QMessageBox.warning(None, "Error", f"No se pudo abrir el archivo: {str(e)}")
-                else:
-                    # Si hay múltiples archivos, mostrar un diálogo de selección
-                    seleccion, ok = QtWidgets.QInputDialog.getItem(
-                        None,
-                        "Seleccionar Archivo",
-                        "Seleccione el archivo a abrir:",
-                        [os.path.basename(ruta) for ruta in rutas_archivos],
-                        0,
-                        False
-                    )
-                    if ok and seleccion:
-                        indice = [os.path.basename(ruta) for ruta in rutas_archivos].index(seleccion)
-                        try:
-                            os.startfile(rutas_archivos[indice])  # Para Windows
-                            # Para Linux: subprocess.call(["xdg-open", rutas_archivos[indice]])
-                            # Para Mac: subprocess.call(["open", rutas_archivos[indice]])
-                        except Exception as e:
-                            QMessageBox.warning(None, "Error", f"No se pudo abrir el archivo: {str(e)}")
-        else:
-            QMessageBox.warning(None, "Archivo No Encontrado", "No se encontró ningún archivo con ese criterio.")
 
     def verificar_estatus_retiro(self):
         try:
@@ -440,7 +300,7 @@ class Ui_MainWindow(object):
                 return
 
             # 4. Consultar la base de datos
-            conexion = sqlite3.connect('equipo_computo.db')
+            conexion = sqlite3.connect(DB_PATH)
             cursor = conexion.cursor()
 
             query_retiro = """
@@ -566,7 +426,7 @@ class Ui_MainWindow(object):
 
 
             # Conectar a la base de datos
-            conn = sqlite3.connect('equipo_computo.db')
+            conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
 
             # Crear un nombre único para el PDF
@@ -801,7 +661,7 @@ class Ui_MainWindow(object):
             self.file_manager.check_and_clean('excel')
 
             # Conectar a la base de datos
-            conn = sqlite3.connect('equipo_computo.db')
+            conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
 
             # Crear un nuevo archivo Excel
@@ -981,17 +841,6 @@ class Ui_MainWindow(object):
                         count = cursor.fetchone()[0]
                         # Asumimos que 'contrato' no tiene espacios adicionales, pero puedes usar .strip() si se requiere
                         respuestas.append(f"Contrato {contrato.strip()}: {count}")
-                    write_data(question, respuestas)
-
-                elif question == '¿Cuantos equipos de computo hay en cada organismo?':
-                    cursor.execute('''  
-                                            SELECT Organismo, COUNT(*)  
-                                            FROM EquipoEntregadoAdquisicion  
-                                            GROUP BY Organismo  
-                                        ''')
-                    resultados = cursor.fetchall()
-                    # Limpiar y formatear los valores recuperados
-                    respuestas = [f"{resultado[0].strip()}: {resultado[1]}" for resultado in resultados]
                     write_data(question, respuestas)
 
                 elif question == '¿Cuantos son laptop normal, laptop uso normal, laptop uso rudo, pc uso general, videoproyector fijo, videoproyector portatil y workstation?':
