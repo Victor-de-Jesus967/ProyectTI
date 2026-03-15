@@ -31,6 +31,8 @@ ProyectTI/
 ├── data/                  # Datos locales (NO se suben a Git)
 │   └── equipo_computo.db   # Base de datos SQLite (generada)
 │
+├── Diapositivas.pdf       # Presentacion del proyecto
+├── Mnaul de usuario 2026  # Manual
 ├── main.py                # Script wrapper para ejecutar la app
 ├── requirements.txt       # Dependencias del proyecto
 └── .gitignore             # Archivos ignorados por Git
