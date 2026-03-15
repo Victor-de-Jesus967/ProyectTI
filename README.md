@@ -17,17 +17,12 @@ ProyectTI/
 │   ├── Db_manager.py
 │   └── ActualizarBD.py
 │
-├── config/                # Configuración (sin credenciales)
+├── config/                
+│   ├── credentials.py    # Credenciales
 │   └── __init__.py
 │
 ├── docs/                  # Documentación del proyecto
-│   ├── README.md
-│   ├── PRESENTACION.md
 │   ├── DESPLIEGUE.md
-│   ├── GITHUB.md
-│   ├── CHECKLIST_TFM.md
-│   ├── Requisitos.md
-│   ├── Documentacion-TFM.pdf
 │   └── Encabezado.pdf
 │
 ├── assets/                # Recursos (iconos, imágenes)
@@ -68,10 +63,6 @@ python -m venv .venv
 
 - macOS/Linux:
 
-```bash
-source .venv/bin/activate
-```
-
 3. Instalar dependencias:
 
 ```bash
@@ -88,7 +79,7 @@ python main.py
 
 ## 🔐 Configuración de credenciales
 
-Las credenciales se definen en `config/credentials.py`. Este archivo **no se sube al repositorio**.
+Las credenciales se definen en `config/credentials.py`. Este archivo 
 
 ```python
 # config/credentials.py
@@ -100,10 +91,9 @@ CONTRASENA = "su_contraseña"
 
 ## 🧩 Recursos adicionales (Drive)
 
-Se anexará un enlace a un Drive donde se otorgan permisos al correo **mouredev@gmail.com**.
+Enlace: https://drive.google.com/drive/folders/1Lltc0UDTylEcJ2NjM123moIP_YFxPsjN?usp=sharing
 
-El usuario con ese acceso podrá descargar:
-
+Contenido:
 - Base de datos
 - Excel adaptado
 - Ejecutable
