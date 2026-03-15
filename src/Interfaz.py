@@ -433,8 +433,8 @@ class Ui_MainWindow(object):
             timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
             output_pdf_file = f'Reporte_{timestamp}.pdf'
 
-            # Leer el PDF de fondo
-            background_pdf = self.resource_path('Encabezado.pdf')
+            # Leer el PDF de fondo indicando la subcarpeta
+            background_pdf = self.resource_path('docs/Encabezado.pdf')
             background = PdfReader(background_pdf)
 
             # Crear un documento PDF para el contenido
