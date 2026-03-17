@@ -102,12 +102,14 @@ Contenido:
 
 ---
 
-## 📌 Notas importantes
+## 📌 Notas importantes para BRAIS
 
 - El proyecto está orientado a Windows, pero puede adaptarse a otras plataformas.
-- Se recomienda hacer copias de seguridad del archivo `data/equipo_computo.db`.
-- Mantener `config/credentials.py` fuera de control de versiones.
-
+- Las credenciales se encuentran en :`config/credentials.py`
+- La base de datos se encuentra en el enlace proprocionado en Drive 
+- Excel adaptado este archivo es para cargar la base de datos, se adapto para carga masicva de informacion al proyecto
+- Brais para que la base datos se muestre en pantalla debes de moverla a la carpeta `data` y una vez cargada presiona el boton atras y se mostrara
+- O tambien puedes cargar el excel y el programa creara la base de datos para su correcto funcionamiento
 ---
 
 ## 🧑‍💻 Desarrollo
@@ -117,4 +119,6 @@ Contenido:
 
 ---
 
-**Última actualización**: Marzo 2026
+**Última actualización**: Marzo 2026 
+
+Un abrazo Brais creci y aprendi mucho con esta maestria, me abriste un mundo de posibilidades para futuros proyectos. 
